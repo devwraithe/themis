@@ -135,4 +135,4 @@ anchor deploy
 
 ---
 
-**Themis Escrow — Trustless. Atomic. On-chain.**\_
+**Themis Escrow — Trustless. Atomic. On-chain.**
