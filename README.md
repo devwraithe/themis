@@ -4,15 +4,15 @@ A simple and secure escrow program built on the Solana Devnet. **Themis** enable
 
 ## Overview
 
-**Themis** facilitates a trustless token-for-token exchange between two parties — a **Maker** and a **Taker** — on the Solana Devnet.  
+**Themis** facilitates a trustless token-for-token exchange between two parties — a **Maker** and a **Taker** — on the Solana Devnet.
 
-The **Maker** initiates an offer by locking a specific amount of **DRT tokens** in an escrow vault controlled by a **Program-Derived Address (PDA)**. The **Taker** accepts the offer by depositing the agreed amount of **wrapped SOL (WSOL)**. Once both deposits are made, the program settles the trade **atomically**, ensuring that both transfers occur together or not at all.  
+The **Maker** initiates an offer by locking a specific amount of **DRT tokens** in an escrow vault controlled by a **Program-Derived Address (PDA)**. The **Taker** accepts the offer by depositing the agreed amount of **wrapped SOL (WSOL)**. Once both deposits are made, the program settles the trade **atomically**, ensuring that both transfers occur together or not at all.
 
-If no Taker fulfills the offer within a given timeframe or the Maker decides to cancel, the **Maker can safely refund** their locked tokens from the vault.  
+If no Taker fulfills the offer within a given timeframe or the Maker decides to cancel, the **Maker can safely refund** their locked tokens from the vault.
 
-- **Maker offers:** `X` DRT → expects `Y` WSOL  
-- **Taker accepts:** sends `Y` WSOL → receives `X` DRT  
-- **Refund option:** Maker reclaims locked tokens if the offer expires or is canceled  
+- **Maker offers:** `X` DRT → expects `Y` WSOL
+- **Taker accepts:** sends `Y` WSOL → receives `X` DRT
+- **Refund option:** Maker reclaims locked tokens if the offer expires or is canceled
 - Funds remain secured in the **PDA vault** until the exchange is completed or refunded.
 
 <!-- ---
@@ -68,8 +68,11 @@ If no Taker fulfills the offer within a given timeframe or the Maker decides to 
 
 ## Escrow Completion Screenshot and Signature
 
-![Escrow Completion Screenshot](./docs/take-offer.png)  
-_Screenshot of the final "Take Offer" transaction confirming DRT → WSOL swap via escrow PDA._
+![Escrow Completion Screenshot 1](./docs/transaction.png)  
+_Screenshot of the successful **"Take Offer"** transaction showing the atomic DRT ↔ WSOL swap executed through the escrow PDA._
+
+![Escrow Completion Screenshot 2](./docs/token_balances.png)  
+_Screenshot of post-transaction token balances verifying that the **Maker** received WSOL and the **Taker** received DRT after escrow completion._
 
 > **Transaction Signature of Take Offer (Escrow Completion)**:  
 > `32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR`
@@ -79,10 +82,12 @@ _Screenshot of the final "Take Offer" transaction confirming DRT → WSOL swap v
 ## Mints and Signatures
 
 ### Token Mints
-- **DRT Mint** - [Fdw8FEek786AZhg4PSSm7nsgHCCu3MsorVhXgMeWZY9a](https://explorer.solana.com/address/Fdw8FEek786AZhg4PSSm7nsgHCCu3MsorVhXgMeWZY9a?cluster=devnet)                     
-- **WSOL Mint**  - [So11111111111111111111111111111111111111112](https://explorer.solana.com/address/So11111111111111111111111111111111111111112?cluster=devnet)
 
-### Signatures 
+- **DRT Mint** - [Fdw8FEek786AZhg4PSSm7nsgHCCu3MsorVhXgMeWZY9a](https://explorer.solana.com/address/Fdw8FEek786AZhg4PSSm7nsgHCCu3MsorVhXgMeWZY9a?cluster=devnet)
+- **WSOL Mint** - [So11111111111111111111111111111111111111112](https://explorer.solana.com/address/So11111111111111111111111111111111111111112?cluster=devnet)
+
+### Signatures
+
 - **Program Deployment Signature** [3pfyDqG6t37vYdn8VahB8PXhY9DbBwRBWKbUHoKc2hnkJ6drhRS7fhupgCtwiR7Dwwvc3cxgtxiS2gXKvWEmojnV](https://explorer.solana.com/tx/3pfyDqG6t37vYdn8VahB8PXhY9DbBwRBWKbUHoKc2hnkJ6drhRS7fhupgCtwiR7Dwwvc3cxgtxiS2gXKvWEmojnV?cluster=devnet)
 - **Make Offer Signature (Escrow Initialization)** - [4xNGv2Y79ScU7FKkf6xrniunWLr6iQvmSXYouQGNsDfhWr2y4xtx1Mqnh4R4v1fGbQMsBvyQvCmQ9hNDQkd6wseb](https://explorer.solana.com/tx/4xNGv2Y79ScU7FKkf6xrniunWLr6iQvmSXYouQGNsDfhWr2y4xtx1Mqnh4R4v1fGbQMsBvyQvCmQ9hNDQkd6wseb?cluster=devnet)
 - **Take Offer Signature (Escrow Completion)** - [32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR](https://explorer.solana.com/tx/32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR?cluster=devnet)
@@ -98,7 +103,7 @@ yarn install
 ```
 
 2. Run the escrow program:
-   
+
 ```bash
 yarn execute
 ```
