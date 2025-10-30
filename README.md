@@ -97,7 +97,7 @@ _Screenshot of post-transaction token balances verifying that the **Maker** rece
 1. Clone and install dependencies:
 
 ```bash
-git clone [https://githb](https://github.com/devwraithe/themis.git)
+git clone https://github.com/devwraithe/themis.git
 cd themis
 yarn install
 ```
@@ -135,6 +135,12 @@ Set Solana CLI to devnet and deploy the program:
 solana config set --url devnet
 anchor deploy
 ```
+
+**Note:** Minting requires the `mint_authority.json` file which is not included in the repository. Running the command above will auto-create a `user_keypair.json` file for you.
+
+## Security
+
+⚠️ **Never commit your `mint_authority.json` and `user_keypair.json` files or share their private keys.**
 
 <!-- ## Verification Links
 
