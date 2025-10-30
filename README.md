@@ -4,12 +4,16 @@ A simple and secure escrow program built on the Solana Devnet. **Themis** enable
 
 ## Overview
 
-**Themis** facilitates a trustless token-for-token exchange between two parties — a **Maker** and a **Taker** — on the Solana Devnet. The **Maker** initiates an offer by locking a specific amount of **DRT tokens** in an escrow vault controlled by a **Program-Derived Address (PDA)**. The **Taker** accepts the offer by depositing the agreed amount of **wrapped SOL (WSOL)**. Once both conditions are met, the trade settles **atomically**, ensuring that both transfers occur together or not at all.
+**Themis** facilitates a trustless token-for-token exchange between two parties — a **Maker** and a **Taker** — on the Solana Devnet.  
+
+The **Maker** initiates an offer by locking a specific amount of **DRT tokens** in an escrow vault controlled by a **Program-Derived Address (PDA)**. The **Taker** accepts the offer by depositing the agreed amount of **wrapped SOL (WSOL)**. Once both deposits are made, the program settles the trade **atomically**, ensuring that both transfers occur together or not at all.  
+
+If no Taker fulfills the offer within a given timeframe or the Maker decides to cancel, the **Maker can safely refund** their locked tokens from the vault.  
 
 - **Maker offers:** `X` DRT → expects `Y` WSOL  
 - **Taker accepts:** sends `Y` WSOL → receives `X` DRT  
-- Funds remain secured in the **PDA vault** until the exchange is completed.
-
+- **Refund option:** Maker reclaims locked tokens if the offer expires or is canceled  
+- Funds remain secured in the **PDA vault** until the exchange is completed or refunded.
 
 <!-- ---
 
