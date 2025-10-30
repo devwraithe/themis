@@ -1,16 +1,17 @@
 # Themis Escrow Program
 
-A simple, secure escrow program on Solana Devnet for token swaps using associated token accounts (ATAs) and a program-derived address (PDA) vault.
+A simple and secure escrow program built on the Solana Devnet. **Themis** enables two parties to safely exchange tokens without relying on trust or intermediaries. It leverages **Program-Derived Addresses (PDAs)** to manage escrow vaults and **Associated Token Accounts (ATAs)** to handle token ownership and transfers securely. Designed for clarity and reliability, Themis demonstrates the fundamentals of Solana-based escrow mechanics and atomic swaps.
 
 ## Overview
 
-This escrow allows a **Maker** to lock DRT tokens in exchange for WSOL from a **Taker**. The trade completes atomically when the Taker accepts the offer.
+**Themis** facilitates a trustless token-for-token exchange between two parties — a **Maker** and a **Taker** — on the Solana Devnet. The **Maker** initiates an offer by locking a specific amount of **DRT tokens** in an escrow vault controlled by a **Program-Derived Address (PDA)**. The **Taker** accepts the offer by depositing the agreed amount of **wrapped SOL (WSOL)**. Once both conditions are met, the trade settles **atomically**, ensuring that both transfers occur together or not at all.
 
-- **Maker offers**: `X` DRT → expects `Y` WSOL
-- **Taker accepts**: sends `Y` WSOL → receives `X` DRT
-- All funds held in PDA-controlled vault until completion
+- **Maker offers:** `X` DRT → expects `Y` WSOL  
+- **Taker accepts:** sends `Y` WSOL → receives `X` DRT  
+- Funds remain secured in the **PDA vault** until the exchange is completed.
 
----
+
+<!-- ---
 
 ## Deployment & Key Addresses
 
@@ -59,40 +60,79 @@ This escrow allows a **Maker** to lock DRT tokens in exchange for WSOL from a **
 - **Take Offer Txn Sig**: `32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR`
 - **Explorer**: [View Take Offer](https://explorer.solana.com/tx/32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR?cluster=devnet)
 
----
+--- -->
 
-## Screenshot and Hash of Tx Completing the Escrow
-
-> **Transaction Signature (Take Offer - Completion)**:  
-> `32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR`
+## Escrow Completion Screenshot and Signature
 
 ![Escrow Completion Screenshot](./docs/take-offer.png)  
 _Screenshot of the final "Take Offer" transaction confirming DRT → WSOL swap via escrow PDA._
 
-> **Hash**:  
+> **Transaction Signature of Take Offer (Escrow Completion)**:  
 > `32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR`
 
----
+[View transaction on Solana xplorer](https://explorer.solana.com/tx/32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR?cluster=devnet)
 
-## How to Run
+## Mints and Signatures
 
+### Token Mints
+- **DRT Mint** - [Fdw8FEek786AZhg4PSSm7nsgHCCu3MsorVhXgMeWZY9a](https://explorer.solana.com/address/Fdw8FEek786AZhg4PSSm7nsgHCCu3MsorVhXgMeWZY9a?cluster=devnet)                     
+- **WSOL Mint**  - [So11111111111111111111111111111111111111112](https://explorer.solana.com/address/So11111111111111111111111111111111111111112?cluster=devnet)
+
+### Signatures 
+- **Program Deployment Signature** [3pfyDqG6t37vYdn8VahB8PXhY9DbBwRBWKbUHoKc2hnkJ6drhRS7fhupgCtwiR7Dwwvc3cxgtxiS2gXKvWEmojnV](https://explorer.solana.com/tx/3pfyDqG6t37vYdn8VahB8PXhY9DbBwRBWKbUHoKc2hnkJ6drhRS7fhupgCtwiR7Dwwvc3cxgtxiS2gXKvWEmojnV?cluster=devnet)
+- **Make Offer Signature (Escrow Initialization)** - [4xNGv2Y79ScU7FKkf6xrniunWLr6iQvmSXYouQGNsDfhWr2y4xtx1Mqnh4R4v1fGbQMsBvyQvCmQ9hNDQkd6wseb](https://explorer.solana.com/tx/4xNGv2Y79ScU7FKkf6xrniunWLr6iQvmSXYouQGNsDfhWr2y4xtx1Mqnh4R4v1fGbQMsBvyQvCmQ9hNDQkd6wseb?cluster=devnet)
+- **Take Offer Signature (Escrow Completion)** - [32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR](https://explorer.solana.com/tx/32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR?cluster=devnet)
+
+## Setup and Usage
+
+1. Clone and install dependencies:
+
+```bash
+git clone [https://githb](https://github.com/devwraithe/themis.git)
+cd themis
+yarn install
+```
+
+2. Run the escrow program:
+   
 ```bash
 yarn execute
 ```
 
-This script:
+## Tests
 
-1. Deploys the program (if not already)
-2. Initializes the escrow
-3. Executes make_offer and take_offer flows
+```bash
+anchor test
+```
 
-> It only deploys on localhost. For deployment to devnet, run `anchor deploy` first before `yarn execute`. Ensure you're connected to a local validator or devnet with funded wallets.
+## Deployment
 
-## Verification Links
+Ensure your environment is configured for Devnet in Anchor.toml:
+
+```toml
+[programs.devnet]
+themis = "<YOUR_PROGRAM_ID>"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+```
+
+> Ensure your local or devnet wallet is funded (via airdrop or manual transfer) before running any transactions.
+
+Set Solana CLI to devnet and deploy the program:
+
+```bash
+solana config set --url devnet
+anchor deploy
+```
+
+<!-- ## Verification Links
 
 - Taker DRT ATA: ![View](https://explorer.solana.com/address/CaVqMAVsHbFSHw6RTQ5HKExMC9HgiMCcgtActg2Wka8W?cluster=devnet)
 - Taker WSOL ATA: ![View](https://explorer.solana.com/address/CCNE4j7qVgBhXMk9Cb6ydnLAtvkuPDTCUzGu6myFLDsQ?cluster=devnet)
+-->
 
 ---
 
-> **Themis Escrow — Trustless. Atomic. On-chain.**\_
+**Themis Escrow — Trustless. Atomic. On-chain.**\_
