@@ -66,7 +66,7 @@ If no Taker fulfills the offer within a given timeframe or the Maker decides to 
 
 --- -->
 
-## Escrow Completion Screenshot and Signature
+## Escrow Completion Screenshot and Hash
 
 ![Escrow Completion Screenshot 1](./docs/transaction.png)  
 _Screenshot of the successful **"Take Offer"** transaction showing the atomic DRT ↔ WSOL swap executed through the escrow PDA._
@@ -74,7 +74,7 @@ _Screenshot of the successful **"Take Offer"** transaction showing the atomic DR
 ![Escrow Completion Screenshot 2](./docs/token_balances.png)  
 _Screenshot of post-transaction token balances verifying that the **Maker** received WSOL and the **Taker** received DRT after escrow completion._
 
-> **Transaction Signature of Take Offer (Escrow Completion)**:  
+> **Transaction Hash of Take Offer (Escrow Completion)**:  
 > `32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR`
 
 [View transaction on Solana xplorer](https://explorer.solana.com/tx/32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR?cluster=devnet)
