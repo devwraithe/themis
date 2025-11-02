@@ -1,15 +1,14 @@
-# Themis Escrow Program
+# Themis Escrow
 
-A simple and secure escrow program built on the Solana Devnet. **Themis** enables two parties to safely exchange tokens without relying on trust or intermediaries. It leverages **Program-Derived Addresses (PDAs)** to manage escrow vaults and **Associated Token Accounts (ATAs)** to handle token ownership and transfers securely. Designed for clarity and reliability, Themis demonstrates the fundamentals of Solana-based escrow mechanics and atomic swaps.
+**Themis** is a simple and secure **escrow program** built on the **Solana Devnet**. Named after Themis, the ancient Greek goddess of justice and fairness, it embodies trustless exchange through code rather than intermediaries. Themis allows two parties to **safely swap tokens** without relying on mutual trust — ensuring that either both sides complete the trade or nothing happens at all.
+
+Under the hood, it uses **Program-Derived Addresses (PDAs)** to manage escrow vaults and **Associated Token Accounts (ATAs)** to securely handle token ownership and transfers. Designed for clarity and reliability, Themis serves as a clean, educational example of **Solana-based escrow logic** and **atomic swap mechanisms**.
 
 ## Overview
 
-**Themis** facilitates a trustless token-for-token exchange between two parties — a **Maker** and a **Taker** — on the Solana Devnet.
+**Themis** facilitates a trustless token-for-token exchange between two parties — a **Maker** and a **Taker** — on the Solana Devnet. The **Maker** initiates an offer by locking a specific amount of tokens (in this case **DRT**) in an escrow vault controlled by a **Program-Derived Address (PDA)**. The **Taker** accepts the offer by depositing the agreed amount of expected tokens (in this case **wrapped SOL (WSOL)**). Once both deposits are made, the program settles the trade **atomically**, ensuring that both transfers occur together or not at all. If no Taker fulfills the offer within a given timeframe or the Maker decides to cancel, the **Maker can safely refund** their locked tokens from the vault.
 
-The **Maker** initiates an offer by locking a specific amount of **DRT tokens** in an escrow vault controlled by a **Program-Derived Address (PDA)**. The **Taker** accepts the offer by depositing the agreed amount of **wrapped SOL (WSOL)**. Once both deposits are made, the program settles the trade **atomically**, ensuring that both transfers occur together or not at all.
-
-If no Taker fulfills the offer within a given timeframe or the Maker decides to cancel, the **Maker can safely refund** their locked tokens from the vault.
-
+**An example:**
 - **Maker offers:** `X` DRT → expects `Y` WSOL
 - **Taker accepts:** sends `Y` WSOL → receives `X` DRT
 - **Refund option:** Maker reclaims locked tokens if the offer expires or is canceled
@@ -88,9 +87,9 @@ _Screenshot of post-transaction token balances verifying that the **Maker** rece
 
 ### Signatures
 
-- **Program Deployment Signature** [3pfyDqG6t37vYdn8VahB8PXhY9DbBwRBWKbUHoKc2hnkJ6drhRS7fhupgCtwiR7Dwwvc3cxgtxiS2gXKvWEmojnV](https://explorer.solana.com/tx/3pfyDqG6t37vYdn8VahB8PXhY9DbBwRBWKbUHoKc2hnkJ6drhRS7fhupgCtwiR7Dwwvc3cxgtxiS2gXKvWEmojnV?cluster=devnet)
-- **Make Offer Signature (Escrow Initialization)** - [4xNGv2Y79ScU7FKkf6xrniunWLr6iQvmSXYouQGNsDfhWr2y4xtx1Mqnh4R4v1fGbQMsBvyQvCmQ9hNDQkd6wseb](https://explorer.solana.com/tx/4xNGv2Y79ScU7FKkf6xrniunWLr6iQvmSXYouQGNsDfhWr2y4xtx1Mqnh4R4v1fGbQMsBvyQvCmQ9hNDQkd6wseb?cluster=devnet)
-- **Take Offer Signature (Escrow Completion)** - [32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR](https://explorer.solana.com/tx/32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR?cluster=devnet)
+- **Program Deployment** [3pfyDqG6t37vYdn8VahB8PXhY9DbBwRBWKbUHoKc2hnkJ6drhRS7fhupgCtwiR7Dwwvc3cxgtxiS2gXKvWEmojnV](https://explorer.solana.com/tx/3pfyDqG6t37vYdn8VahB8PXhY9DbBwRBWKbUHoKc2hnkJ6drhRS7fhupgCtwiR7Dwwvc3cxgtxiS2gXKvWEmojnV?cluster=devnet)
+- **Make Offer (Escrow Initialization)** - [4xNGv2Y79ScU7FKkf6xrniunWLr6iQvmSXYouQGNsDfhWr2y4xtx1Mqnh4R4v1fGbQMsBvyQvCmQ9hNDQkd6wseb](https://explorer.solana.com/tx/4xNGv2Y79ScU7FKkf6xrniunWLr6iQvmSXYouQGNsDfhWr2y4xtx1Mqnh4R4v1fGbQMsBvyQvCmQ9hNDQkd6wseb?cluster=devnet)
+- **Take Offer (Escrow Completion)** - [32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR](https://explorer.solana.com/tx/32YQVBX9jVEhcHbjyaWR3eVaan2BgxHBkKnUNEP4Jz72ijfv8BMWr4rfGLFkBt5mXzpaPqYTRm1sa5dnjdAVcRDR?cluster=devnet)
 
 ## Setup and Usage
 
@@ -127,6 +126,7 @@ cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 ```
 
+> [!IMPORTANT]
 > Ensure your local or devnet wallet is funded (via airdrop or manual transfer) before running any transactions.
 
 Set Solana CLI to devnet and deploy the program:
@@ -136,10 +136,12 @@ solana config set --url devnet
 anchor deploy
 ```
 
-**Note:** Minting requires the `mint_authority.json` file which is not included in the repository. Running the command above will auto-create a `user_keypair.json` file for you.
+> [!CAUTION]
+> **Note:** Minting requires the `mint_authority.json` file which is not included in the repository. Running the command above will auto-create a `user_keypair.json` file for you.
 
 ## Security
 
+> [!IMPORTANT]
 ⚠️ **Never commit your `mint_authority.json` and `user_keypair.json` files or share their private keys.**
 
 <!-- ## Verification Links
